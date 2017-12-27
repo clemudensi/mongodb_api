@@ -1,0 +1,19 @@
+{
+  "name": "mongo-db",
+  "version": "1.0.0",
+  "description": "A simple back-end for a react contact app",
+  "main": "server2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "clement udensi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "latest",
+    "body-parser": "latest",
+    "mongodb": "latest"
+  },
+  "devDependencies": {
+    "mongodb": "latest"
+  }
+}

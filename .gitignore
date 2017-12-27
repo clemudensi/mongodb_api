@@ -1,0 +1,8 @@
+node_modules/
+.idea/
+config/
+controllers/
+db/
+models/
+*server1.js
+*server.js
