@@ -4,6 +4,7 @@
   "description": "A simple back-end for a react contact app",
   "main": "server2.js",
   "scripts": {
+    "start": "node server2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "clement udensi",
