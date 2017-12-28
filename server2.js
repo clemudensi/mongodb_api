@@ -6,6 +6,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
 const mongoose = require('mongoose');
+const mongojs = require('mongojs');
 const Schema = mongoose.Schema;
 const ObjectID = mongodb.ObjectID;
 
@@ -51,7 +52,7 @@ function handleError(res, reason, message, code) {
 // let Contact = module.exports =  mongoose.model('Contact', contactSchema);
 
 app.get("/contacts", function(req, res) {
-    db = 'phonebook';
+    db = mongojs('mongodb://udensiclem:Fritzs123@ds131687.mlab.com:31687/phonebook');
 
     db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
         if (err) {

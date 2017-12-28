@@ -13,7 +13,8 @@
     "express": "latest",
     "body-parser": "latest",
     "mongodb": "latest",
-    "mongoose": "latest"
+    "mongoose": "latest",
+    "mongojs": "latest"
   },
   "devDependencies": {
     "mongodb": "latest"
