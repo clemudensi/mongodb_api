@@ -51,6 +51,8 @@ function handleError(res, reason, message, code) {
 // let Contact = module.exports =  mongoose.model('Contact', contactSchema);
 
 app.get("/contacts", function(req, res) {
+    const db = client.db('phonebook');
+
     db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
         if (err) {
             handleError(res, err.message, "Failed to get contacts.");
