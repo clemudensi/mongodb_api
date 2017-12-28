@@ -11,7 +11,8 @@
   "dependencies": {
     "express": "latest",
     "body-parser": "latest",
-    "mongodb": "latest"
+    "mongodb": "latest",
+    "mongoose": "latest"
   },
   "devDependencies": {
     "mongodb": "latest"

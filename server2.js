@@ -5,6 +5,8 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const ObjectID = mongodb.ObjectID;
 
 const CONTACTS_COLLECTION = "contacts";
@@ -14,27 +16,37 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-var db;
+let db;
 
 function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
     res.status(code || 500).json({"error": message});
 }
 
-/*  "/contacts"
- *    GET: finds all contacts
- *    POST: creates a new contact
- */
+// const contactSchema = new Schema({
+//     name: String,
+//     phone_number: String,
+//     address: String
+// });
+//
+// let Contact = module.exports =  mongoose.model('Contact', contactSchema);
 
 app.get("/contacts", function(req, res) {
+    db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+        if (err) {
+            handleError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(docs);
+        }
+    });
 });
 
 app.post("/contacts", function(req, res) {
-    var newContact = req.body;
+    let newContact = req.body;
     newContact.createDate = new Date();
 
-    if (!(req.body.firstName || req.body.lastName)) {
-        handleError(res, "Invalid user input", "Must provide a first or last name.", 400);
+    if (!(req.body.name || req.body.phone_number)) {
+        handleError(res, "Invalid user input", "Must provide a name or phone number", 400);
     }
 
     db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
@@ -58,8 +70,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
     console.log("Database connection ready");
 
     // Initialize the app.
-    var server = app.listen(process.env.PORT || 8080, function () {
-        var port = server.address().port;
+    const server = app.listen(process.env.PORT || 8080, function () {
+        const port = server.address().port;
         console.log("App now running on port", port);
     });
 });
