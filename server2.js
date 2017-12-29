@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const mongojs = require('mongojs');
 const Schema = mongoose.Schema;
 const ObjectID = mongodb.ObjectID;
+const db = mongojs(process.env.MONGODB_URI);
 
 const CONTACTS_COLLECTION = "contacts";
 
@@ -17,7 +18,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-let db;
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
@@ -26,8 +26,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
         process.exit(1);
     }
 
-    // Save database object from the callback for reuse.
-    db = database;
     console.log("Database connection ready");
 
     // Initialize the app.
@@ -52,7 +50,7 @@ function handleError(res, reason, message, code) {
 // let Contact = module.exports =  mongoose.model('Contact', contactSchema);
 
 app.get("/contacts", function(req, res) {
-    db = mongojs(process.env.MONGODB_URI);
+
 
     db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
         if (err) {
