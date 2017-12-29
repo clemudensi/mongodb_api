@@ -52,7 +52,7 @@ function handleError(res, reason, message, code) {
 // let Contact = module.exports =  mongoose.model('Contact', contactSchema);
 
 app.get("/contacts", function(req, res) {
-    db = mongojs('mongodb://udensiclem:Fritzs123@ds131687.mlab.com:31687/phonebook');
+    db = mongojs(process.env.MONGODB_URI);
 
     db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
         if (err) {
