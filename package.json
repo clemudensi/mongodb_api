@@ -4,17 +4,21 @@
   "description": "A simple back-end for a react contact app",
   "main": "server2.js",
   "scripts": {
-    "start": "node server2.js",
+    "start": "babel-node --presets es2015 server2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "clement udensi",
   "license": "ISC",
   "dependencies": {
-    "express": "latest",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "body-parser": "latest",
+    "express": "latest",
     "mongodb": "latest",
-    "mongoose": "latest",
-    "mongojs": "latest"
+    "mongojs": "latest",
+    "mongoose": "latest"
   },
   "devDependencies": {
     "mongodb": "latest"
