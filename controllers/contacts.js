@@ -31,6 +31,7 @@ module.exports = {
 
     save(req, res, next) {
         const contact = req.body;
+        contact.createDate = new Date();
         if(!contact.name){
             res.status(400);
             res.json({
