@@ -30,22 +30,20 @@ module.exports = {
     },
 
     save(req, res, next) {
-        const contact = req.body;
-        contact.createDate = new Date();
-        if(!contact.name){
-            res.status(400);
-            res.json({
-                "error": "Bad Data"
-            });
-        } else {
-            db.contacts.save(contact, (err, contact) => {
-                if(err){
-                    handleError(res, err.message, "Failed to save contact.");
-                }
-                res.json(contact);
-                console.log('Successfully created a contact');
-            });
+        var newContact = req.body;
+        newContact.createDate = new Date();
+
+        if (!(req.body.firstName || req.body.lastName)) {
+            handleError(res, "Invalid user input", "Must provide a first or last name.", 400);
         }
+
+        db.collection('contacts').insertOne(newContact, function(err, doc) {
+            if (err) {
+                handleError(res, err.message, "Failed to create new contact.");
+            } else {
+                res.status(201).json(doc.ops[0]);
+            }
+        });
     },
 
     update(req, res, next) {
