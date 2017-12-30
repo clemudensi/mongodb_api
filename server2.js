@@ -6,11 +6,14 @@ const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
 const router = require("./config/contact-list/router");
 const routerHistory = require("./config/call-history/router");
+const cors = require('cors');
+var path = require("path");
 const app = express();
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/v1', routerHistory, router);
 let db;
 

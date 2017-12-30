@@ -18,7 +18,8 @@
     "express": "latest",
     "mongodb": "latest",
     "mongojs": "latest",
-    "mongoose": "latest"
+    "mongoose": "latest",
+    "cors": "latest"
   },
   "devDependencies": {
     "mongodb": "latest"
